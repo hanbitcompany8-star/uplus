@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한빛컴퍼니 | 휴대폰 싸게 사는 곳 · 실시간 시세 비교 및 공식인증 대리점</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard & Inter Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#e6007e', // LG U+ 시그니처 마젠타 계열 & 한빛 포인트
+                            600: '#c8006b',
+                            700: '#a30057',
+                            900: '#1e1b4b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* 커스텀 스크롤바 숨기기 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* 티커 애니메이션 */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 28s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- 상단 최상위 안내 바 -->
+    <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-2">
+                <span class="bg-brand-500 text-white font-bold px-2 py-0.5 rounded text-[11px]">공식인증</span>
+                <span class="font-medium text-white">한빛컴퍼니</span>
+                <span class="text-slate-500">|</span>
+                <span class="hidden sm:inline text-slate-300">전국 직영 매장 운영 · 전국 우체국 택배 당일 발송</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#how-to" class="hover:text-white transition">신청 방법</a>
+                <a href="#notice" class="hover:text-white transition">유의사항</a>
+                <button onclick="openLookupModal()" class="hover:text-white transition font-semibold text-amber-400">접수내역 조회</button>
+                <a href="tel:054-715-8818" class="hidden md:flex items-center gap-1 font-bold text-white bg-slate-800 px-2.5 py-1 rounded-full hover:bg-slate-700">
+                    <i class="fa-solid fa-phone text-brand-500 text-[10px]"></i> 상담 054-715-8818
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 메인 네비게이션 헤더 (Sticky) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- 로고 -->
+            <a href="#" class="flex items-center gap-3 group shrink-0">
+                <!-- LG유플러스 공식인증대리점 한빛컴퍼니 원형 엠블럼 -->
+                <div class="w-11 h-11 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center group-hover:scale-105 transition">
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-sm" xmlns="http://www.w3.org/2000/svg" aria-label="LG유플러스 공식인증대리점 한빛컴퍼니">
+                        <defs>
+                            <linearGradient id="hanbitRingGrad" x1="15%" y1="15%" x2="85%" y2="85%">
+                                <stop offset="0%" stop-color="#3b5998" />
+                                <stop offset="50%" stop-color="#3b7a75" />
+                                <stop offset="100%" stop-color="#6ca33b" />
+                            </linearGradient>
+                            <path id="topArcPath" d="M 32,100 A 68,68 0 1,1 168,100" />
+                            <path id="bottomArcPath" d="M 32,106 A 68,68 0 0,0 168,106" />
+                        </defs>
+                        <circle cx="100" cy="100" r="94" fill="#ffffff" />
+                        <circle cx="100" cy="100" r="78" fill="none" stroke="url(#hanbitRingGrad)" stroke-width="26" />
+                        <text fill="#ffffff" font-size="14.5" font-weight="800" letter-spacing="1.8">
+                            <textPath href="#topArcPath" startOffset="50%" text-anchor="middle">LG유플러스공식인증대리점</textPath>
+                        </text>
+                        <text fill="#ffffff" font-size="16.5" font-weight="800" letter-spacing="4.5">
+                            <textPath href="#bottomArcPath" startOffset="50%" text-anchor="middle">한 빛 컴 퍼 니</textPath>
+                        </text>
+                        <circle cx="66" cy="100" r="15" fill="#d80546" />
+                        <path d="M 66,89 A 11,11 0 1,0 77,100 L 70,100" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" />
+                        <polyline points="66,93 66,101 70,101" fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="61.5" cy="95.5" r="1.5" fill="#ffffff" />
+                        <text x="86" y="108" fill="#6b7280" font-family="Arial, sans-serif" font-size="25" font-weight="800" letter-spacing="-0.5">LG U</text>
+                        <text x="145" y="96" fill="#6b7280" font-family="Arial, sans-serif" font-size="18" font-weight="800">+</text>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-xl tracking-tight text-slate-900">한빛컴퍼니</span>
+                        <span class="text-[11px] font-bold text-brand-600 bg-brand-50 border border-brand-100 px-1.5 py-0.5 rounded">공식대리점</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 -mt-0.5">투명한 정찰제 휴대폰 성지</p>
+                </div>
+            </a>
+
+            <!-- 데스크탑 메뉴 -->
+            <nav class="hidden md:flex items-center space-x-4 lg:space-x-5 text-xs lg:text-sm font-semibold text-slate-700 whitespace-nowrap">
+                <a href="#price-section" class="hover:text-brand-500 transition">휴대폰 시세</a>
+                <a href="#internet-section" class="hover:text-brand-500 transition flex items-center gap-1">
+                    <span>인터넷·TV 가입</span>
+                    <span class="text-[10px] font-extrabold bg-brand-50 text-brand-600 px-1.5 py-0.5 rounded">사은품</span>
+                </a>
+                <a href="#how-to" class="hover:text-brand-500 transition">신청 방법</a>
+                <a href="#stores" class="hover:text-brand-500 transition">매장 찾기</a>
+                <a href="#notice" class="hover:text-brand-500 transition">유의사항</a>
+                <a href="#faq" class="hover:text-brand-500 transition">FAQ</a>
+            </nav>
+
+            <!-- 우측 액션 버튼 -->
+            <div class="flex items-center gap-1.5 sm:gap-2 shrink-0 whitespace-nowrap">
+                <button onclick="openAdminLogin()" class="text-xs sm:text-sm font-bold text-slate-600 hover:text-brand-600 bg-slate-100 hover:bg-brand-50 px-3 py-2 rounded-xl transition flex items-center gap-1" title="단가표 관리자 모드">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span class="hidden sm:inline">단가 관리</span>
+                </button>
+                <button onclick="openLookupModal()" class="text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-xl transition">
+                    접수내역 <span id="order-badge" class="hidden ml-1 bg-brand-500 text-white text-[10px] px-1.5 py-0.2 rounded-full">0</span>
+                </button>
+                <button onclick="openKakaoModal()" class="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-900 bg-[#FEE500] hover:bg-[#FDD800] px-3.5 py-2 rounded-xl transition shadow-sm">
+                    <i class="fa-solid fa-comment text-slate-900"></i>
+                    <span>카톡 상담</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 실시간 핫딜 티커 배너 -->
+    <div class="bg-slate-900 text-white py-2.5 overflow-hidden border-b border-slate-800">
+        <div class="animate-marquee flex items-center space-x-8 text-xs sm:text-sm">
+            <span class="flex items-center gap-2"><span class="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">특가</span> 갤럭시 S26 256GB 번호이동 시 <strong>최대 125만원 할인 · 할부원금 0원</strong></span>
+            <span class="text-slate-600">•</span>
+            <span class="flex items-center gap-2"><span class="bg-brand-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">인기</span> 아이폰18 Pro 256GB 번호이동 시 <strong>75만원 즉시 할인 · 할부원금 1,241,000원</strong></span>
+            <span class="text-slate-600">•</span>
+            <span class="flex items-center gap-2"><span class="bg-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">폴더블</span> 갤럭시 Z플립8 256GB <strong>102만원 지원 · 할부원금 663,000원</strong></span>
+            <span class="text-slate-600">•</span>
+            <span class="flex items-center gap-2"><span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">안심</span> 부가서비스 강요 없음 · 제휴카드 눈속임 없음 · 중고폰 반납 조건 없음!</span>
+            <span class="text-slate-600">•</span>
+            <span class="flex items-center gap-2"><span class="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">특가</span> 갤럭시 S26 256GB 번호이동 시 <strong>최대 125만원 할인 · 할부원금 0원</strong></span>
+            <span class="text-slate-600">•</span>
+            <span class="flex items-center gap-2"><span class="bg-brand-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">인기</span> 아이폰18 Pro 256GB 번호이동 시 <strong>75만원 즉시 할인 · 할부원금 1,241,000원</strong></span>
+            <span class="text-slate-600">•</span>
+            <span class="flex items-center gap-2"><span class="bg-indigo-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">폴더블</span> 갤럭시 Z플립8 256GB <strong>102만원 지원 · 할부원금 663,000원</strong></span>
+        </div>
+    </div>
+
+    <!-- 히어로 신뢰 배지 섹션 -->
+    <section class="bg-white border-b border-slate-200 py-8 sm:py-10 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col gap-5">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-brand-50 text-brand-600 border border-brand-100 px-3 py-1 rounded-full text-xs font-bold mb-3">
+                        <i class="fa-solid fa-bolt"></i> 공식 온라인샵 공시지원금 실시간 연동 + 한빛 대리점 추가지원금
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight break-keep">
+                        복잡한 말장난 없이,<br class="sm:hidden"> <span class="text-brand-500">보이는 가격 그대로</span> <span class="whitespace-nowrap">개통합니다</span>
+                    </h1>
+                    <p class="text-slate-500 text-sm sm:text-base mt-2.5 break-keep">
+                        제휴카드 할인·중고폰 반납을 끼워 넣어 싸 보이게 속이지 않습니다. 실제 할부원금과 월 납부액을 지금 바로 비교해 보세요.
+                    </p>
+                </div>
+
+                <!-- 4대 핵심 신뢰 지표 -->
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 text-xs font-semibold text-slate-700 pt-1">
+                    <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-3.5 py-2 rounded-xl">
+                        <i class="fa-solid fa-circle-check text-brand-500"></i> 공식인증 대리점
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-3.5 py-2 rounded-xl">
+                        <i class="fa-solid fa-circle-check text-brand-500"></i> 휴대폰 판매 12년
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-3.5 py-2 rounded-xl">
+                        <i class="fa-solid fa-circle-check text-brand-500"></i> 누적 20만 대 개통
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-3.5 py-2 rounded-xl">
+                        <i class="fa-solid fa-circle-check text-brand-500"></i> 직영 매장 & 전국 택배
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 메인 휴대폰 시세 및 필터 섹션 -->
+    <main id="price-section" class="max-w-6xl mx-auto px-4 py-8 sm:py-12">
+        
+        <!-- 컨트롤 필터 박스 -->
+        <div class="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200 card-shadow mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 mb-5 border-b border-slate-100">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                        <span>실시간 휴대폰 시세표</span>
+                        <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">실시간 업데이트</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">공시지원금은 통신사 공식 공시 금액을 그대로 반영하며, 한빛컴퍼니 자체 추가지원금이 더해집니다.</p>
+                </div>
+                <div class="text-xs text-slate-400 font-medium" id="current-timestamp">
+                    기준일시: 불러오는 중...
+                </div>
+            </div>
+
+            <!-- 필터 그리드 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- 1. 제조사 선택 -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">제조사 선택</label>
+                    <div class="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-xl" id="brand-filter">
+                        <button onclick="setFilter('brand', 'all')" data-val="all" class="filter-btn-brand bg-white text-slate-900 shadow-sm font-bold text-xs py-2.5 rounded-lg transition">전체</button>
+                        <button onclick="setFilter('brand', 'samsung')" data-val="samsung" class="filter-btn-brand text-slate-600 hover:text-slate-900 font-semibold text-xs py-2.5 rounded-lg transition">삼성</button>
+                        <button onclick="setFilter('brand', 'apple')" data-val="apple" class="filter-btn-brand text-slate-600 hover:text-slate-900 font-semibold text-xs py-2.5 rounded-lg transition">애플</button>
+                    </div>
+                </div>
+
+                <!-- 2. 가입 유형 -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">가입 유형</label>
+                    <div class="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-xl" id="type-filter">
+                        <button onclick="setFilter('joinType', 'mnp')" data-val="mnp" class="filter-btn-type bg-white text-brand-600 shadow-sm font-bold text-xs py-2.5 rounded-lg transition">번호이동 (통신사이동)</button>
+                        <button onclick="setFilter('joinType', 'change')" data-val="change" class="filter-btn-type text-slate-600 hover:text-slate-900 font-semibold text-xs py-2.5 rounded-lg transition">기기변경 (쓰던통신사)</button>
+                    </div>
+                </div>
+
+                <!-- 3. 요금제 선택 -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">기준 요금제 (6개월 유지)</label>
+                    <select id="plan-select" onchange="setFilter('plan', this.value)" class="w-full bg-slate-100 border-0 text-slate-900 font-bold text-xs rounded-xl px-3.5 py-3 focus:ring-2 focus:ring-brand-500 outline-none cursor-pointer">
+                        <option value="85000" selected>5G 데이터플랜 MAX (월 85,000원)</option>
+                        <option value="95000">플러스플랜 95 (월 95,000원)</option>
+                        <option value="105000">플러스플랜 105 (월 105,000원)</option>
+                        <option value="115000">플러스플랜 115 (월 115,000원)</option>
+                        <option value="130000">플러스플랜 130 (월 130,000원)</option>
+                    </select>
+                </div>
+
+                <!-- 4. 할인 유형 -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">할인 방법</label>
+                    <div class="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-xl" id="discount-filter">
+                        <button onclick="setFilter('discountType', 'public')" data-val="public" class="filter-btn-discount bg-white text-brand-600 shadow-sm font-bold text-xs py-2.5 rounded-lg transition">공시지원금 할인</button>
+                        <button onclick="setFilter('discountType', 'contract')" data-val="contract" class="filter-btn-discount text-slate-600 hover:text-slate-900 font-semibold text-xs py-2.5 rounded-lg transition">선택약정 25%</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 필터 하단 안내 바 -->
+            <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="inline-block w-2 h-2 rounded-full bg-brand-500"></span>
+                    <span id="filter-summary-text" class="font-semibold text-slate-700">총 9개 모델 · 번호이동 · 5G 데이터플랜 MAX · 공시지원금 기준</span>
+                </div>
+                <div class="flex flex-wrap gap-3 text-[11px] text-slate-400">
+                    <span>※ 한빛컴퍼니 추가지원금은 월 85,000원 이상 요금제 6개월 유지 조건입니다.</span>
+                    <span>※ 월 납부금액은 24개월 할부(연 5.9% 이자 포함) 기준이며, 상품 클릭 시 변경 비교가 가능합니다.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 상품 리스트 그리드 -->
+        <div id="phone-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- JS를 통해 동적 렌더링 -->
+        </div>
+
+        <!-- 시세표 하단 투명성 안내 박스 -->
+        <div class="mt-8 bg-slate-100 rounded-2xl p-5 text-xs text-slate-600 space-y-1.5 leading-relaxed border border-slate-200/70">
+            <p class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-circle-info text-brand-500 mr-1"></i> 한빛컴퍼니 시세 산정 기준 안내</p>
+            <p>• <strong>공시지원금:</strong> 통신사 공식 온라인샵에 공시된 금액을 실시간으로 반영합니다.</p>
+            <p>• <strong>대리점 추가지원금:</strong> 한빛컴퍼니 자체 특별 지원금으로, 공시지원금과 선택약정(25% 요금할인) 어느 쪽을 선택하셔도 동일하게 기기값에서 즉시 할인됩니다.</p>
+            <p>• <strong>월 예상 납부금액:</strong> 휴대폰 월 할부금(연 5.9% 할부수수료 포함) + 요금제 월정액 − 선택약정 할인액으로 계산된 실제 청구 금액입니다.</p>
+            <p>• <strong>3無 클린 정책:</strong> 유료 부가서비스 강제 가입 없음 · 제휴카드 발급 조건 없음 · 쓰던 중고폰 반납 조건이 일절 없습니다.</p>
+        </div>
+    </main>
+
+    <!-- ==========================================
+         인터넷·TV 가입 및 결합 사은품 안내 섹션
+         ========================================== -->
+    <section id="internet-section" class="bg-gradient-to-b from-slate-50 to-white border-t border-slate-200 py-14 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 border border-indigo-100 px-3 py-1 rounded-full text-xs font-extrabold mb-2">
+                        <i class="fa-solid fa-wifi"></i> LG유플러스 공식 1차 대리점 직영 접수처
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900">인터넷 · IPTV 가입 최대 사은품 혜택</h2>
+                    <p class="text-sm text-slate-500 mt-1">설치 당일 현금 사은품 즉시 입금! 한빛컴퍼니 휴대폰 개통 고객은 유무선 결합 추가 할인까지 동시에 적용됩니다.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs font-bold">
+                    <span class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-slate-700"><i class="fa-solid fa-gift text-brand-500 mr-1"></i>법정 최대 사은품 보장</span>
+                    <span class="bg-white border border-slate-200 px-3 py-2 rounded-xl text-slate-700"><i class="fa-solid fa-bolt text-amber-500 mr-1"></i>설치 완료 당일 입금</span>
+                </div>
+            </div>
+
+            <!-- 인터넷·TV 대표 패키지 그리드 (관리자 수정 연동) -->
+            <div id="internet-cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                <!-- JS를 통해 동적 렌더링 -->
+            </div>
+
+            <!-- 인터넷·TV 간편 상담 신청 박스 -->
+            <div id="internet-apply-box" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow">
+                <form onsubmit="submitInternetApplication(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end">
+                    <div class="lg:col-span-12 mb-1">
+                        <h3 class="text-base sm:text-lg font-black text-slate-900">인터넷 · TV 빠른 사은품 견적 및 설치 상담 신청</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">인터넷 단독 가입, TV 추가, 기존 통신사 위약금 대납 상담까지 전문 상담사가 정확히 안내해 드립니다.</p>
+                    </div>
+                    <div class="lg:col-span-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">희망 상품 선택</label>
+                        <select id="inet-product-select" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs font-bold text-slate-900 outline-none focus:ring-2 focus:ring-brand-500">
+                            <!-- JS를 통해 동적 렌더링 -->
+                        </select>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">성함</label>
+                        <input type="text" id="inet-name" required placeholder="홍길동" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs font-semibold outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                    <div class="lg:col-span-3">
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">연락처</label>
+                        <input type="tel" id="inet-phone" required placeholder="010-1234-5678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs font-semibold outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                    <div class="lg:col-span-3">
+                        <button type="submit" id="btn-submit-inet" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm py-3 rounded-xl shadow-md transition">
+                            사은품 견적 상담받기
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 신청 진행 절차 섹션 -->
+    <section id="how-to" class="bg-white border-y border-slate-200 py-14 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-extrabold text-brand-500 tracking-wider uppercase">EASY PROCESS</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">신청은 이렇게 진행돼요</h2>
+                <p class="text-sm text-slate-500 mt-2">홈페이지에서는 이름과 연락처만 남기시면 됩니다. 주민번호나 결제 정보는 받지 않으며, 담당 직원이 전화로 가격을 한 번 더 안내해 드린 후 공식 신청서로 안전하게 진행합니다.</p>
+            </div>
+
+            <!-- 4단계 프로세스 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 relative">
+                    <div class="w-8 h-8 rounded-full bg-brand-500 text-white font-black text-sm flex items-center justify-center mb-4">1</div>
+                    <h3 class="font-extrabold text-base text-slate-900 mb-1.5">견적 비교 및 고르기</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">원하는 휴대폰을 누르고 용량·가입유형·요금제·할인방법·할부개월을 바꿔가며 최저 월 납부금액을 확인하세요.</p>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 relative">
+                    <div class="w-8 h-8 rounded-full bg-brand-500 text-white font-black text-sm flex items-center justify-center mb-4">2</div>
+                    <h3 class="font-extrabold text-base text-slate-900 mb-1.5">간편 상담 신청하기</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">현재 통신사, 수령 방법(전국 우체국 택배 또는 매장 방문), 성함과 연락처만 입력하면 10초 만에 접수됩니다.</p>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 relative">
+                    <div class="w-8 h-8 rounded-full bg-brand-500 text-white font-black text-sm flex items-center justify-center mb-4">3</div>
+                    <h3 class="font-extrabold text-base text-slate-900 mb-1.5">담당 직원 해피콜 연락</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">영업시간(10:00~21:00) 내 접수 순서대로 전화를 드려 홈페이지 견적 그대로 가격과 재고, 유의사항을 확인합니다.</p>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 relative">
+                    <div class="w-8 h-8 rounded-full bg-brand-500 text-white font-black text-sm flex items-center justify-center mb-4">4</div>
+                    <h3 class="font-extrabold text-base text-slate-900 mb-1.5">공식 신청서 작성 · 개통</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">통신사 공식 온라인 신청서를 작성하면 조건이 최종 확정되며, 기기 수령 후 안전하게 개통을 완료합니다.</p>
+                </div>
+            </div>
+
+            <!-- 수령 방법 2가지 비교 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-6 sm:p-8 flex items-start gap-5">
+                    <div class="text-4xl">📦</div>
+                    <div>
+                        <div class="inline-block bg-brand-500 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-2">전국 어디나 무료배송</div>
+                        <h3 class="text-lg sm:text-xl font-extrabold mb-2">택배로 편하게 받기 (비대면 개통)</h3>
+                        <ul class="text-xs sm:text-sm text-slate-300 space-y-1.5">
+                            <li>• 100% 비대면 온라인 신청으로 매장 방문 불필요</li>
+                            <li>• 우체국 안심 택배로 새 휴대폰을 먼저 받아본 뒤 개통 진행</li>
+                            <li>• 제주·도서산간·지방 어디든 수도권 성지 매장과 100% 동일한 가격</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-brand-50 to-rose-50 border border-brand-100 rounded-3xl p-6 sm:p-8 flex items-start gap-5">
+                    <div class="text-4xl">🏬</div>
+                    <div>
+                        <div class="inline-block bg-brand-600 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-2">당일 즉시 수령</div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">가까운 직영 매장 방문하기</h3>
+                        <ul class="text-xs sm:text-sm text-slate-700 space-y-1.5">
+                            <li>• 원하는 지점과 방문 날짜·시간을 예약하여 대기 없이 상담</li>
+                            <li>• 매장에서 미개봉 실물을 직접 확인하고 그 자리에서 즉시 개통</li>
+                            <li>• 방문 전 담당 직원이 색상별 재고를 사전 확보해 연락드립니다</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 직영 매장 안내 섹션 -->
+    <section id="stores" class="max-w-6xl mx-auto px-4 py-14">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+            <div>
+                <span class="text-xs font-extrabold text-brand-500 tracking-wider uppercase">OUR STORES</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">한빛컴퍼니 직영 매장 안내</h2>
+                <p class="text-sm text-slate-500 mt-1">전 지점 정찰제 운영으로 어느 매장을 방문하셔도 홈페이지와 동일한 최대 지원금을 약속합니다.</p>
+            </div>
+            <div class="flex gap-2" id="store-region-tabs">
+                <button onclick="filterStores('all')" data-region="all" class="store-tab bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl transition">전체 지점</button>
+                <button onclick="filterStores('seoul')" data-region="seoul" class="store-tab bg-white text-slate-600 border border-slate-200 text-xs font-bold px-4 py-2 rounded-xl transition">서울권</button>
+                <button onclick="filterStores('gyeonggi')" data-region="gyeonggi" class="store-tab bg-white text-slate-600 border border-slate-200 text-xs font-bold px-4 py-2 rounded-xl transition">경기·인천권</button>
+                <button onclick="filterStores('local')" data-region="local" class="store-tab bg-white text-slate-600 border border-slate-200 text-xs font-bold px-4 py-2 rounded-xl transition">경북·대구·기타</button>
+            </div>
+        </div>
+
+        <div id="store-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- JS를 통해 매장 카드 렌더링 -->
+        </div>
+    </section>
+
+    <!-- 신청 전 필수 유의사항 섹션 -->
+    <section id="notice" class="bg-slate-900 text-slate-300 py-14 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-8">
+                <span class="text-xs font-extrabold text-amber-400 tracking-wider uppercase">IMPORTANT NOTICE</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">신청 전 꼭 확인해 주세요</h2>
+                <p class="text-sm text-slate-400 mt-1">대리점 특별 지원금을 받고 개통하시면 지켜주셔야 하는 필수 유지 조건이 있습니다. 투명한 거래를 위해 미리 안내해 드립니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 공통 안내 -->
+                <div class="bg-slate-800/80 border border-slate-700 rounded-3xl p-6 sm:p-7">
+                    <h3 class="text-base font-extrabold text-white flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-circle-check text-brand-500"></i> 개통 및 유지 공통 안내
+                    </h3>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        <li class="flex gap-2"><span class="text-brand-500 font-bold">•</span> <span>택배 수령 시 휴대폰을 받으신 후 안내에 따라 유심을 장착하고 개통을 완료합니다.</span></li>
+                        <li class="flex gap-2"><span class="text-brand-500 font-bold">•</span> <span>개통 후 <strong>185일(약 6개월) 동안은 개통한 유심 그대로 기기에 유지</strong>해 주셔야 합니다. 다른 기기에 유심을 옮겨 끼우면(유심기변) 지원금이 회수될 수 있습니다.</span></li>
+                        <li class="flex gap-2"><span class="text-brand-500 font-bold">•</span> <span>개통 후 185일 이내에는 기기변경·일시정지·명의변경·해지를 피해 주세요. 지원금 반환 사유가 됩니다.</span></li>
+                        <li class="flex gap-2"><span class="text-brand-500 font-bold">•</span> <span>정상 사용 회선 확인을 위해 매월 통화 5회 이상(누적 10분 이상) 및 데이터 사용 기록이 필요합니다.</span></li>
+                        <li class="flex gap-2"><span class="text-brand-500 font-bold">•</span> <span>단말기 부정 유통(일명 가개통 매입/되팔기) 목적의 개통은 엄격히 금지되며, 적발 시 지원금 전액 환수 및 법적 불이익이 발생할 수 있습니다.</span></li>
+                    </ul>
+                </div>
+
+                <!-- 대리점 추가지원금 및 식스플랜 안내 -->
+                <div class="bg-slate-800/80 border border-slate-700 rounded-3xl p-6 sm:p-7">
+                    <h3 class="text-base font-extrabold text-white flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-coins text-amber-400"></i> 한빛컴퍼니 추가지원금 & 요금제 유지 안내
+                    </h3>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span> <span><strong>요금제 6개월 유지 조건:</strong> 개통 시 선택하신 요금제(월 85,000원 이상)를 <strong>185일(약 6개월)간 유지</strong>하는 조건으로 대리점 특별 지원금이 지급됩니다.</span></li>
+                        <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span> <span><strong>6개월 후 자유 변경:</strong> 185일이 지난 7개월 차부터는 월 47,000원 이상 표준 요금제로 낮추셔도 받으신 공시지원금 및 한빛컴퍼니 추가지원금에 대한 위약금이 발생하지 않습니다.</span></li>
+                        <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span> <span>만약 185일 이전에 요금제를 하향하거나 해지·번호이동을 하실 경우 지원금 차액이 청구됩니다.</span></li>
+                        <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span> <span>제조사 초기 불량 교환/환불은 삼성전자·애플 공식 서비스센터의 불량 판정서 발급 기준으로 처리됩니다.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 자주 묻는 질문 (FAQ) -->
+    <section id="faq" class="max-w-4xl mx-auto px-4 py-14">
+        <div class="text-center mb-10">
+            <span class="text-xs font-extrabold text-brand-500 tracking-wider uppercase">FAQ</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">자주 묻는 질문</h2>
+            <p class="text-sm text-slate-500 mt-1">고객님들이 가장 많이 궁금해하시는 내용을 정리했습니다.</p>
+        </div>
+
+        <div class="space-y-3" id="faq-container">
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(0)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 hover:bg-slate-50 transition">
+                    <span>Q. 홈페이지에 나와 있는 가격에서 추가되는 비용이나 조건이 정말 없나요?</span>
+                    <i id="faq-icon-0" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-ans-0" class="px-6 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    네, 맞습니다! 타 업체처럼 제휴카드를 매달 수십만 원씩 써야 한다거나, 36개월/48개월 할부로 눈속임하거나, 쓰던 폰을 반납해야 하는 조건이 전혀 없습니다. 또한 고가의 유료 부가서비스 강제 가입도 일절 없는 정찰제로 운영됩니다.
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(1)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 hover:bg-slate-50 transition">
+                    <span>Q. 택배로 신청하면 쓰던 휴대폰이 중간에 끊기지 않나요?</span>
+                    <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-ans-1" class="hidden px-6 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    걱정하지 않으셔도 됩니다. 우체국 택배로 새 휴대폰을 먼저 받아보신 후, 저희에게 연락을 주시면 그때 개통을 진행해 드립니다. 따라서 택배가 배송되는 기간 동안 기존 휴대폰은 끊김 없이 그대로 사용하실 수 있습니다.
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(2)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 hover:bg-slate-50 transition">
+                    <span>Q. 공시지원금과 선택약정(25% 할인) 중 어떤 걸 선택하는 게 유리한가요?</span>
+                    <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-ans-2" class="hidden px-6 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    모델과 요금제에 따라 다릅니다. 상품을 클릭하시면 열리는 <strong>[실시간 견적 계산기]</strong>에서 '공시지원금'과 '선택약정 25%' 버튼을 번갈아 눌러보시면, 어느 쪽이 월 예상 납부금액이 더 저렴한지 1원 단위까지 즉시 비교하실 수 있습니다. 한빛컴퍼니 자체 추가지원금은 두 방식 모두 동일하게 지원됩니다!
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+                <button onclick="toggleFaq(3)" class="w-full px-6 py-4 text-left flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 hover:bg-slate-50 transition">
+                    <span>Q. 휴대폰 기기값을 할부 말고 현금 완납(일시불)으로도 구매할 수 있나요?</span>
+                    <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="faq-ans-3" class="hidden px-6 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    물론입니다! 견적 창에서 할부 개월 수를 <strong>'일시불(현금완납)'</strong>로 선택하시면 연 5.9%의 할부 이자 없이 할부원금만 깔끔하게 완납 개통이 가능합니다. 해피콜 상담 시 직원에게 말씀해 주시면 안내해 드립니다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 (Footer) -->
+    <footer class="bg-slate-950 text-slate-400 text-xs py-12 px-4 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+            <div class="space-y-2">
+                <div class="flex items-center gap-2 text-white font-black text-lg mb-3">
+                    <div class="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center text-sm">H</div>
+                    <span>한빛컴퍼니</span>
+                </div>
+                <p>대표자: 김영주 | 사업자등록번호: 652-06-01248</p>
+                <p>대표주소: 경북 구미시 신시로49 (전국 직영매장 및 온라인 센터 운영)</p>
+                <p>대표번호: 054-715-8818</p>
+                <p class="text-slate-600 pt-2">Copyright © HANBIT COMPANY. All rights reserved.</p>
+            </div>
+
+            <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 min-w-[260px]">
+                <p class="text-slate-300 font-bold mb-1">고객센터 · 개통상담 안내</p>
+                <p class="text-2xl font-black text-white tracking-tight mb-2">054-715-8818</p>
+                <p class="text-[11px] text-slate-400">• 매장 방문 상담: 매일 10:00 ~ 21:00 (연중무휴)</p>
+                <p class="text-[11px] text-slate-400">• 택배 개통 상담: 평일·토요일 10:00 ~ 20:00</p>
+                <div class="mt-3 pt-3 border-t border-slate-800 flex items-center gap-2">
+                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="text-[11px] text-emerald-400 font-semibold">LG유플러스 공식인증 1차 대리점</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         상세 견적 계산 및 상담 신청 모달
+         ========================================== -->
+    <div id="quote-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto">
+        <div class="bg-white w-full max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+            <!-- 모달 헤더 -->
+            <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
+                <div>
+                    <span id="modal-badge" class="text-[10px] font-bold bg-brand-500 px-2 py-0.5 rounded uppercase">실시간 정찰제 견적</span>
+                    <h3 id="modal-phone-name" class="text-lg sm:text-xl font-black mt-0.5">iPhone 18 Pro</h3>
+                </div>
+                <button onclick="closeQuoteModal()" class="w-9 h-9 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- 모달 바디 -->
+            <div class="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1">
+                
+                <!-- 1. 용량 선택 -->
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-700 mb-2">1. 저장 용량을 선택해 주세요</label>
+                    <div id="modal-storage-options" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                        <!-- JS 렌더링 -->
+                    </div>
+                </div>
+
+                <!-- 2. 가입 유형 선택 -->
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-700 mb-2">2. 가입 유형을 선택해 주세요</label>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <button type="button" onclick="updateModalOption('joinType', 'mnp')" id="modal-btn-mnp" class="p-3.5 rounded-2xl border-2 text-left transition">
+                            <div class="font-extrabold text-sm">번호이동 (통신사 이동)</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">쓰던 번호 그대로 통신사만 옮길게요</div>
+                        </button>
+                        <button type="button" onclick="updateModalOption('joinType', 'change')" id="modal-btn-change" class="p-3.5 rounded-2xl border-2 text-left transition">
+                            <div class="font-extrabold text-sm">기기변경 (통신사 유지)</div>
+                            <div class="text-[11px] text-slate-500 mt-0.5">쓰던 통신사 그대로 기기만 바꿀게요</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. 요금제 선택 -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="text-xs font-extrabold text-slate-700">3. 요금제를 선택해 주세요</label>
+                        <span class="text-[11px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded">식스플랜: 6개월만 유지 후 변경 자유</span>
+                    </div>
+                    <select id="modal-plan-select" onchange="updateModalOption('plan', this.value)" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-900 outline-none focus:ring-2 focus:ring-brand-500">
+                        <option value="85000">5G 데이터플랜 MAX (월 85,000원 · 데이터 무제한)</option>
+                        <option value="95000">플러스플랜 95 (월 95,000원 · 데이터 무제한+쉐어링)</option>
+                        <option value="105000">플러스플랜 105 (월 105,000원 · 데이터 무제한+OTT혜택)</option>
+                        <option value="115000">플러스플랜 115 (월 115,000원 · VIP 혜택 포함)</option>
+                        <option value="130000">플러스플랜 130 (월 130,000원 · 최상위 혜택)</option>
+                    </select>
+                </div>
+
+                <!-- 4. 할인 방법 및 할부 개월 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-700 mb-2">4. 할인 방법 선택</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="updateModalOption('discountType', 'public')" id="modal-btn-public" class="py-2.5 px-3 rounded-xl border-2 text-xs font-bold transition">
+                                공시지원금 할인
+                            </button>
+                            <button type="button" onclick="updateModalOption('discountType', 'contract')" id="modal-btn-contract" class="py-2.5 px-3 rounded-xl border-2 text-xs font-bold transition">
+                                선택약정 (25%)
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-700 mb-2">5. 기기 할부 개월</label>
+                        <div class="grid grid-cols-4 gap-1.5" id="modal-months-group">
+                            <button type="button" onclick="updateModalOption('months', 0)" data-m="0" class="modal-m-btn py-2.5 rounded-xl border text-xs font-bold transition">일시불</button>
+                            <button type="button" onclick="updateModalOption('months', 12)" data-m="12" class="modal-m-btn py-2.5 rounded-xl border text-xs font-bold transition">12개월</button>
+                            <button type="button" onclick="updateModalOption('months', 24)" data-m="24" class="modal-m-btn py-2.5 rounded-xl border text-xs font-bold transition">24개월</button>
+                            <button type="button" onclick="updateModalOption('months', 30)" data-m="30" class="modal-m-btn py-2.5 rounded-xl border text-xs font-bold transition">30개월</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 영수증 형태 상세 견적 요약표 -->
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <span class="text-xs font-bold text-slate-500">출고가</span>
+                        <span id="receipt-retail" class="text-sm font-bold text-slate-700">1,991,000원</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-500">공시지원금 할인</span>
+                        <span id="receipt-public" class="font-bold text-brand-600">-300,000원</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-500">한빛컴퍼니 특별 추가지원금</span>
+                        <span id="receipt-dealer" class="font-bold text-brand-600">-450,000원</span>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-slate-200 pt-3">
+                        <div>
+                            <span class="text-sm font-extrabold text-slate-900">최종 할부원금 (실구매가)</span>
+                            <span id="receipt-discount-rate" class="ml-1.5 text-[11px] font-extrabold text-white bg-rose-500 px-1.5 py-0.5 rounded">38% 할인</span>
+                        </div>
+                        <span id="receipt-principal" class="text-lg font-black text-brand-600">1,241,000원</span>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-3.5 border border-slate-200/80 space-y-1.5 text-xs">
+                        <div class="flex justify-between text-slate-500">
+                            <span id="receipt-monthly-device-label">월 기기 할부금 (24개월 · 연 5.9% 포함)</span>
+                            <span id="receipt-monthly-device" class="font-semibold text-slate-800">54,940원</span>
+                        </div>
+                        <div class="flex justify-between text-slate-500">
+                            <span id="receipt-plan-label">월 통신 요금제</span>
+                            <span id="receipt-plan-price" class="font-semibold text-slate-800">85,000원</span>
+                        </div>
+                        <div id="receipt-contract-row" class="hidden flex justify-between text-emerald-600 font-bold">
+                            <span>선택약정 25% 요금할인</span>
+                            <span id="receipt-contract-discount">-21,250원</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-slate-100">
+                            <span class="font-extrabold text-slate-900 text-sm">월 예상 총 납부금액</span>
+                            <span id="receipt-total-monthly" class="text-xl font-black text-slate-900">139,940원</span>
+                        </div>
+                    </div>
+
+                    <!-- 클린 배지 -->
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                        <span class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg">✓ 유료 부가서비스 없음</span>
+                        <span class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg">✓ 제휴카드 발급 조건 없음</span>
+                        <span class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-lg">✓ 쓰던 폰 반납 없음</span>
+                    </div>
+                </div>
+
+                <!-- 6. 고객 신청 폼 -->
+                <form id="apply-form" onsubmit="submitApplication(event)" class="bg-white border-2 border-brand-500 rounded-2xl p-5 space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h4 class="font-black text-base text-slate-900">이 견적 그대로 상담 및 개통 신청하기</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">신청 비용은 0원이며, 공식 신청서 작성 전 언제든 무료 취소가 가능합니다.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">현재 사용 중인 통신사</label>
+                            <select id="form-current-carrier" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold">
+                                <option value="SKT">SKT</option>
+                                <option value="KT">KT</option>
+                                <option value="LG U+">LG U+</option>
+                                <option value="알뜰폰">알뜰폰 (MVNO)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">기기 수령 방법</label>
+                            <select id="form-receive-method" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold">
+                                <option value="전국 우체국 택배 (무료)">📦 전국 우체국 택배 (무료배송)</option>
+                                <option value="직영 매장 방문 수령">🏬 직영 매장 방문 수령</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">성함</label>
+                            <input type="text" id="form-name" required placeholder="홍길동" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:ring-2 focus:ring-brand-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">연락처</label>
+                            <input type="tel" id="form-phone" required placeholder="010-1234-5678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:ring-2 focus:ring-brand-500 outline-none">
+                        </div>
+                    </div>
+
+                    <label class="flex items-start gap-2 text-xs text-slate-600 cursor-pointer">
+                        <input type="checkbox" required checked class="mt-0.5 rounded text-brand-500 focus:ring-brand-500">
+                        <span>[필수] 개통 상담을 위해 성함·연락처·견적 내역을 한빛컴퍼니에 제공하는 것에 동의합니다. (상담 종료 후 자동 파기)</span>
+                    </label>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                        <button type="submit" id="btn-submit-apply" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm py-3.5 rounded-xl shadow-md transition">
+                            전화 상담으로 개통 신청하기
+                        </button>
+                        <button type="button" onclick="submitViaKakao()" class="w-full bg-[#FEE500] hover:bg-[#FDD800] text-slate-900 font-extrabold text-sm py-3.5 rounded-xl transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-comment"></i> 이 견적으로 카톡 먼저 문의
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         관리자 비밀번호 인증 모달
+         ========================================== -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl overflow-hidden p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-black text-lg text-slate-900"><i class="fa-solid fa-lock text-brand-500 mr-1.5"></i>단가표 관리자 로그인</h3>
+                <button onclick="closeAdminLogin()" class="text-slate-400 hover:text-slate-700"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">단가표를 수정하고 웹호스팅용 HTML을 내보내려면 관리자 비밀번호를 입력하세요. (초기 비밀번호: <strong>1234</strong>)</p>
+            <form onsubmit="verifyAdminLogin(event)" class="space-y-3">
+                <input type="password" id="admin-pw-input" required placeholder="비밀번호 입력" class="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-3 text-sm font-bold outline-none focus:ring-2 focus:ring-brand-500">
+                <button type="submit" class="w-full bg-slate-900 hover:bg-brand-600 text-white font-extrabold text-sm py-3 rounded-xl transition">관리자 페이지 열기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         단가표 관리자 대시보드 모달
+         ========================================== -->
+    <div id="admin-panel-modal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+            <!-- 헤더 -->
+            <div class="px-6 py-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-2 shrink-0">
+                <div>
+                    <span class="text-[10px] font-bold bg-emerald-500 text-slate-950 px-2 py-0.5 rounded uppercase">ADMIN CONSOLE</span>
+                    <h3 class="text-lg font-black mt-0.5">한빛컴퍼니 휴대폰·인터넷 단가표 & 네이버 클라우드 SMS 연동 관리</h3>
+                </div>
+                <button onclick="closeAdminPanel()" class="w-9 h-9 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- 상단 안내 및 SMS API 주소 설정 -->
+            <div class="p-4 sm:p-6 bg-slate-50 border-b border-slate-200 space-y-4 shrink-0">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="bg-white p-3.5 rounded-2xl border border-slate-200">
+                        <label class="block text-xs font-extrabold text-slate-800 mb-1">
+                            <i class="fa-solid fa-paper-plane text-brand-500 mr-1"></i>네이버 클라우드 SENS 문자/알림톡 발송 API URL
+                        </label>
+                        <input type="text" id="admin-sms-endpoint" placeholder="예: ./send_sms.php 또는 https://...apigw.ntruss.com/..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono text-slate-800">
+                        <p class="text-[11px] text-slate-400 mt-1">웹호스팅에 <code>send_sms.php</code>를 올리셨다면 <code>./send_sms.php</code> 그대로 두시면 됩니다.</p>
+                    </div>
+                    <div class="bg-amber-50 p-3.5 rounded-2xl border border-amber-200 text-xs text-amber-900 flex flex-col justify-center">
+                        <p class="font-extrabold mb-1"><i class="fa-solid fa-circle-exclamation mr-1"></i>웹호스팅 전체 방문자 가격 반영 방법</p>
+                        <p class="text-[11px] leading-relaxed">표에서 단가를 수정한 뒤 <strong>[수정된 index.html 다운로드]</strong> 버튼을 눌러 내려받은 파일을 웹호스팅(FTP)에 덮어쓰기 업로드하면 모든 방문자에게 즉시 반영됩니다.</p>
+                    </div>
+                </div>
+
+                <!-- 탭 및 상품 추가 버튼 -->
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex flex-wrap gap-1.5 bg-slate-200 p-1 rounded-xl">
+                        <button type="button" onclick="switchAdminTab('mnp')" id="admin-tab-mnp" class="bg-white text-brand-600 font-extrabold text-xs px-4 py-2 rounded-lg shadow-sm">번호이동 단가표</button>
+                        <button type="button" onclick="switchAdminTab('change')" id="admin-tab-change" class="text-slate-600 font-bold text-xs px-4 py-2 rounded-lg">기기변경 단가표</button>
+                        <button type="button" onclick="switchAdminTab('internet')" id="admin-tab-internet" class="text-slate-600 font-bold text-xs px-4 py-2 rounded-lg">인터넷·TV 요금/사은품</button>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" id="admin-add-btn" onclick="handleAdminAdd()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition">
+                            + 새 휴대폰 모델 추가
+                        </button>
+                        <button type="button" onclick="resetDefaultPhones()" class="bg-white border border-slate-300 hover:bg-slate-100 text-slate-600 text-xs font-bold px-3 py-2 rounded-xl transition">
+                            전체 초기화
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단가 수정 테이블 -->
+            <div class="p-4 sm:p-6 overflow-auto flex-1">
+                <table class="w-full text-left border-collapse min-w-[780px]">
+                    <thead id="admin-table-head">
+                        <!-- JS 렌더링 -->
+                    </thead>
+                    <tbody id="admin-table-body" class="divide-y divide-slate-100 text-xs">
+                        <!-- JS 렌더링 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 하단 액션 바 -->
+            <div class="px-6 py-4 bg-slate-100 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 shrink-0">
+                <button type="button" onclick="saveAdminChangesLocal()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl transition">
+                    현재 화면에 즉시 적용 (미리보기)
+                </button>
+                <button type="button" onclick="exportUpdatedHtmlFile()" class="bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i>
+                    <span>수정된 index.html 다운로드 (웹호스팅 업로드용)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         접수내역 조회 모달
+         ========================================== -->
+    <div id="lookup-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden">
+            <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+                <h3 class="font-extrabold text-base">나의 상담 및 개통 접수내역</h3>
+                <button onclick="closeLookupModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6">
+                <div id="lookup-list" class="space-y-3 max-h-80 overflow-y-auto">
+                    <!-- JS 렌더링 -->
+                </div>
+                <div class="mt-5 pt-4 border-t border-slate-100 text-right">
+                    <button onclick="closeLookupModal()" class="bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         토스트 알림 메시지 박스 (alert 대체)
+         ========================================== -->
+    <div id="toast-box" class="fixed bottom-6 right-6 z-50 hidden max-w-sm bg-slate-900 text-white px-5 py-4 rounded-2xl shadow-2xl border border-slate-700 flex items-start gap-3">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5"></i>
+        <div>
+            <p id="toast-title" class="font-extrabold text-sm">신청이 완료되었습니다!</p>
+            <p id="toast-desc" class="text-xs text-slate-300 mt-0.5">담당 직원이 곧 연락드리겠습니다.</p>
+        </div>
+    </div>
+
+    <!-- 웹호스팅 업로드용 원클릭 코드 복사 / 다운로드 플로팅 버튼 -->
+    <div class="fixed bottom-5 left-5 z-40 flex items-center gap-2 bg-slate-900/95 backdrop-blur-md text-white p-2 rounded-2xl shadow-2xl border border-slate-700">
+        <button type="button" onclick="copyFullHtmlCode()" class="bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+            <i class="fa-regular fa-copy"></i>
+            <span>HTML 코드 전체 복사</span>
+        </button>
+        <button type="button" onclick="exportUpdatedHtmlFile()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-3 py-2 rounded-xl transition flex items-center gap-1" title="index.html 파일로 바로 저장">
+            <i class="fa-solid fa-download"></i>
+            <span class="hidden sm:inline">파일 저장</span>
+        </button>
+    </div>
+
+    <script>
+// ... existing code ... -->
+        function exportUpdatedHtmlFile() {
+            saveAdminChangesLocal();
+            let fullHtml = buildCleanExportHtml();
+
+            const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('index.html 다운로드 시작', '다운로드된 index.html 파일을 웹호스팅에 덮어쓰기 업로드해 주세요!');
+        }
+
+        function buildCleanExportHtml() {
+            let fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            const serializedData = `/* EXPORT_DATA_START */\n        let phonesData = ${JSON.stringify(phonesData, null, 4)};\n        let internetData = ${JSON.stringify(internetData, null, 4)};\n        /* EXPORT_DATA_END */`;
+            fullHtml = fullHtml.replace(/\/\* EXPORT_DATA_START \*\/[\s\S]*?\/\* EXPORT_DATA_END \*\//, serializedData);
+            fullHtml = fullHtml.replace(
+                /let SMS_API_ENDPOINT = .*?;/,
+                `let SMS_API_ENDPOINT = localStorage.getItem('hanbit_sms_endpoint') || '${SMS_API_ENDPOINT}';`
+            );
+            return fullHtml;
+        }
+
+        function copyFullHtmlCode() {
+            const fullHtml = buildCleanExportHtml();
+            const textarea = document.createElement('textarea');
+            textarea.value = fullHtml;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('HTML 코드 전체 복사 완료!', '클립보드에 전체 코드가 복사되었습니다. 메모장이나 웹호스팅 에디터에 붙여넣기(Ctrl+V) 하세요!');
+            } catch (err) {
+                showToast('복사 안내', '우측 [파일 저장] 버튼을 누르시면 index.html 파일로 바로 다운로드됩니다.');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ==========================================
+        // 10. 토스트 알림 및 초기 실행
+// ... existing code ... -->
